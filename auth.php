@@ -35,7 +35,7 @@ require_once('classes/message.class.php');
 /**
  * Email authentication plugin.
  */
-class auth_plugin_emailadmin extends auth_plugin_base {
+class auth_plugin_iomademailadmin extends auth_plugin_base {
 
     const IOMAD_COMPANY_ADMIN_NOTIF = -3;
 
@@ -43,7 +43,7 @@ class auth_plugin_emailadmin extends auth_plugin_base {
      * Constructor.
      */
     public function __construct() {
-        $this->authtype = 'emailadmin';
+        $this->authtype = 'iomademailadmin';
     }
 
     /* Backward compatible constructor. */
@@ -118,7 +118,7 @@ class auth_plugin_emailadmin extends auth_plugin_base {
         $event->trigger();
 
         if (! $this->send_confirmation_email_support($user)) {
-            print_error('auth_emailadminnoemail', 'auth_emailadmin');
+            print_error('auth_iomademailadminnoemail', 'auth_iomademailadmin');
         }
 
         if ($notify) {
@@ -128,7 +128,7 @@ class auth_plugin_emailadmin extends auth_plugin_base {
             $PAGE->set_title($emailconfirm);
             $PAGE->set_heading($PAGE->course->fullname);
             echo $OUTPUT->header();
-            notice(get_string('auth_emailadminconfirmsent', 'auth_emailadmin', $user->email), "$CFG->wwwroot/index.php");
+            notice(get_string('auth_iomademailadminconfirmsent', 'auth_iomademailadmin', $user->email), "$CFG->wwwroot/index.php");
         } else {
             return true;
         }
@@ -166,7 +166,7 @@ class auth_plugin_emailadmin extends auth_plugin_base {
                 if ($user->firstaccess == 0) {
                     $DB->set_field("user", "firstaccess", time(), array("id" => $user->id));
                 }
-                \auth\emailadmin\message::send_confirmation_email_user($user);
+                \auth\iomademailadmin\message::send_confirmation_email_user($user);
                 return AUTH_CONFIRM_OK;
             }
         } else {
@@ -248,8 +248,8 @@ class auth_plugin_emailadmin extends auth_plugin_base {
         }
 
         // Save settings.
-        set_config('recaptcha', $config->recaptcha, 'auth/emailadmin');
-        set_config('notif_strategy', $config->notif_strategy, 'auth/emailadmin');
+        set_config('recaptcha', $config->recaptcha, 'auth/iomademailadmin');
+        set_config('notif_strategy', $config->notif_strategy, 'auth/iomademailadmin');
         return true;
     }
 
@@ -273,7 +273,7 @@ class auth_plugin_emailadmin extends auth_plugin_base {
      */
     public function send_confirmation_email_support($user) {
         global $CFG, $DB;
-        $config = get_config('auth/emailadmin');
+        $config = get_config('auth/iomademailadmin');
 
         $site = get_site();
         $supportuser = core_user::get_support_user();
@@ -300,7 +300,7 @@ class auth_plugin_emailadmin extends auth_plugin_base {
         $data["userdata"] .= $data["customfields"];
         $username = urlencode($user->username);
         $username = str_replace('.', '%2E', $username); // Prevent problems with trailing dots.
-        $data["link"] = $CFG->wwwroot .'/auth/emailadmin/confirm.php?data='. $user->secret .'/'. $username;
+        $data["link"] = $CFG->wwwroot .'/auth/iomademailadmin/confirm.php?data='. $user->secret .'/'. $username;
 
         $user->mailformat = 1;  // Always send HTML version as well.
 
@@ -352,14 +352,14 @@ class auth_plugin_emailadmin extends auth_plugin_base {
 
         $errors = array();
         foreach ($send_list as $admin) {
-            $use_lang = \auth\emailadmin\message::get_user_language($admin);
+            $use_lang = \auth\iomademailadmin\message::get_user_language($admin);
 
-            $subject = get_string_manager()->get_string('auth_emailadminconfirmationsubject',
-                                                        'auth_emailadmin',
+            $subject = get_string_manager()->get_string('auth_iomademailadminconfirmationsubject',
+                                                        'auth_iomademailadmin',
                                                         format_string($site->fullname),
                                                         $use_lang);
 
-            $message     = get_string_manager()->get_string('auth_emailadminconfirmation', 'auth_emailadmin', $data, $use_lang);
+            $message     = get_string_manager()->get_string('auth_iomademailadminconfirmation', 'auth_iomademailadmin', $data, $use_lang);
             $messagehtml = text_to_html($message, false, false, true);
 
             $result = email_to_user($admin, $supportuser, $subject, $message, $messagehtml);
@@ -371,11 +371,11 @@ class auth_plugin_emailadmin extends auth_plugin_base {
 
         $error = '';
         if (!$admin_found) {
-            $error = get_string("auth_emailadminnoadmin", "auth_emailadmin");
+            $error = get_string("auth_iomademailadminnoadmin", "auth_iomademailadmin");
         }
 
         if (count($errors) > 0) {
-            $error = get_string("auth_emailadminnotif_failed", "auth_emailadmin");
+            $error = get_string("auth_iomademailadminnotif_failed", "auth_iomademailadmin");
             foreach ($errors as $admin) {
                 $error .= $admin . " ";
             }
@@ -385,14 +385,14 @@ class auth_plugin_emailadmin extends auth_plugin_base {
             error_log($error);
             foreach ($admins as $admin) {
                 if (!in_array($admin->username, $errors)) {
-                    $use_lang = \auth\emailadmin\message::get_user_language($admin);
+                    $use_lang = \auth\iomademailadmin\message::get_user_language($admin);
 
-                    $subject = get_string_manager()->get_string('auth_emailadminconfirmationsubject',
-                                                                'auth_emailadmin',
+                    $subject = get_string_manager()->get_string('auth_iomademailadminconfirmationsubject',
+                                                                'auth_iomademailadmin',
                                                                 format_string($site->fullname),
                                                                 $use_lang);
 
-                    $message     = get_string_manager()->get_string('auth_emailadminconfirmation', 'auth_emailadmin', $data, $use_lang);
+                    $message     = get_string_manager()->get_string('auth_iomademailadminconfirmation', 'auth_iomademailadmin', $data, $use_lang);
                     $messagehtml = text_to_html($message, false, false, true);
 
                     $result = email_to_user($admin, $supportuser, $subject, $message, $messagehtml);

@@ -15,28 +15,28 @@
 <table cellspacing="0" cellpadding="5" border="0">
 <tr>
    <td colspan="3">
-        <h2 class="main"><?php print_string('auth_emailadminsettings', 'auth_emailadmin') ?> </h2>
+        <h2 class="main"><?php print_string('auth_iomademailadminsettings', 'auth_iomademailadmin') ?> </h2>
    </td>
 </tr>
 <tr>
     <td align="right"><label for="menurecaptcha"><?php
-        print_string('auth_emailadminrecaptcha_key', 'auth_emailadmin');
+        print_string('auth_iomademailadminrecaptcha_key', 'auth_iomademailadmin');
         ?></label></td>
     <td><?php
         global $OUTPUT;
         echo html_writer::select($yesno, 'recaptcha', $config->recaptcha, false);
         ?></td>
-    <td><?php print_string('auth_emailadminrecaptcha', 'auth_emailadmin') ?></td>
+    <td><?php print_string('auth_iomademailadminrecaptcha', 'auth_iomademailadmin') ?></td>
 </tr>
 <tr>
     <td align="right"><label for="notif_strategy"><?php
-        print_string("auth_emailadminnotif_strategy_key", "auth_emailadmin");
+        print_string("auth_iomademailadminnotif_strategy_key", "auth_iomademailadmin");
         ?></label></td>
     <td><?php
         global $OUTPUT;
-        $options = array('-1' => get_string("auth_emailadminnotif_strategy_first", "auth_emailadmin"),
-                '-2' => get_string("auth_emailadminnotif_strategy_all", "auth_emailadmin"),
-                '-3' => get_string("auth_emailadminnotif_strategy_company", "auth_emailadmin"));
+        $options = array('-1' => get_string("auth_iomademailadminnotif_strategy_first", "auth_iomademailadmin"),
+                '-2' => get_string("auth_iomademailadminnotif_strategy_all", "auth_iomademailadmin"),
+                '-3' => get_string("auth_iomademailadminnotif_strategy_company", "auth_iomademailadmin"));
         $admins = get_admins();
         foreach ($admins as $admin) {
             $options[$admin->id] = $admin->username;
@@ -44,7 +44,7 @@
 
         echo html_writer::select($options, 'notif_strategy', $config->notif_strategy);
         ?></td>
-    <td><?php print_string('auth_emailadminnotif_strategy', 'auth_emailadmin') ?></td>
+    <td><?php print_string('auth_iomademailadminnotif_strategy', 'auth_iomademailadmin') ?></td>
 </tr>
 
 <?php

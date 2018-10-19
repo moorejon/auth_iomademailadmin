@@ -6,21 +6,21 @@ so I congratulate you :)
 In the instructions below, MOODLE_HOME is the path to where your Moodle is
 deployed in your server.
 
-The best way to install this plug-in is directly through https://moodle.org/plugins/auth_emailadmin
+The best way to install this plug-in is directly through https://moodle.org/plugins/auth_iomademailadmin
 by clicking on 'Install Now'. If you do that, you can skip step 1 below (but not 1.1 and 1.2).
 
 Otherwise, to install this plugin:
 
 1- Upload/unpack everything under:
-MOODLE_HOME/auth/emailadmin
+MOODLE_HOME/auth/iomademailadmin
 
-NOTE 1: You have to create the 'emailadmin' folder.
+NOTE 1: You have to create the 'iomademailadmin' folder.
 
 NOTE 2: if the package you got the files from put them within a folder of its own,
-remove the files from that folder. For example, there should *NOT* be a "moodle-auth_emailadmin"
-folder under "MOODLE_HOME/auth/emailadmin".
+remove the files from that folder. For example, there should *NOT* be a "moodle-auth_iomademailadmin"
+folder under "MOODLE_HOME/auth/iomademailadmin".
 
-1.1- Customize the email messages under lang/en/auth_emailadmin.php. If you
+1.1- Customize the email messages under lang/en/auth_iomademailadmin.php. If you
 do it later, you may have to "Purge All Caches". See below.
 
 1.2- If your Moodle is in a language other than English, you may have to make a copy of lang/en to lang/your-language.
@@ -54,7 +54,7 @@ Development --> Purge all caches
 9- Try it out!
 
 Questions? Comments? Go to:
-- https://moodle.org/plugins/auth_emailadmin
-- or https://github.com/hrimhari/moodle-auth_emailadmin/issues
+- https://moodle.org/plugins/auth_iomademailadmin
+- or https://github.com/hrimhari/moodle-auth_iomademailadmin/issues
 - or email felipe AT carassonet DOT org
 

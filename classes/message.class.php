@@ -15,14 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Message class for auth-emailadmin plugin.
+ * Message class for auth-iomademailadmin plugin.
  *
  * @package    moodle multiauth
  * @copyright  2017 Felipe Carasso
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace auth\emailadmin;
+namespace auth\iomademailadmin;
 defined('MOODLE_INTERNAL') || die();
 
 //require('../../config.php');
@@ -69,18 +69,18 @@ class message {
         if (!empty($company)) {
             $data->company = $company->name;
         } else {
-            $data->company = get_string('myorganization', 'auth_emailadmin');
+            $data->company = get_string('myorganization', 'auth_iomademailadmin');
         }
     
         $use_lang = message::get_user_language($user);
-        $subject = get_string_manager()->get_string('auth_emailadminconfirmationsubject', 'auth_emailadmin', format_string($site->fullname), $use_lang);
+        $subject = get_string_manager()->get_string('auth_iomademailadminconfirmationsubject', 'auth_iomademailadmin', format_string($site->fullname), $use_lang);
     
         $username = urlencode($user->username);
         $username = str_replace('.', '%2E', $username); // Prevent problems with trailing dots.
         $data->link  = $CFG->wwwroot;
         $data->username = $username;
-        $message     = get_string_manager()->get_string('auth_emailadminuserconfirmation', 'auth_emailadmin', $data, $use_lang);
-        $messagehtml = text_to_html(get_string('auth_emailadminuserconfirmation', 'auth_emailadmin', $data), false, false, true);
+        $message     = get_string_manager()->get_string('auth_iomademailadminuserconfirmation', 'auth_iomademailadmin', $data, $use_lang);
+        $messagehtml = text_to_html(get_string('auth_iomademailadminuserconfirmation', 'auth_iomademailadmin', $data), false, false, true);
     
         $user->mailformat = 1;  // Always send HTML version as well.
     
