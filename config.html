@@ -7,7 +7,7 @@
 
     $yesno = array( get_string('no'), get_string('yes') );
 
-    if (!isset($config->notif_strategy) || !is_numeric($config->notif_strategy) || $config->notif_strategy < -2) {
+    if (!isset($config->notif_strategy) || !is_numeric($config->notif_strategy) || $config->notif_strategy < -3) {
         $config->notif_strategy = -1;
     }
 ?>
@@ -34,9 +34,9 @@
         ?></label></td>
     <td><?php
         global $OUTPUT;
-        $options = array('-1' => get_string("auth_emailadminnotif_strategy_first", "auth_emailadmin"), 
-            '-2' => get_string("auth_emailadminnotif_strategy_all", "auth_emailadmin")
-            );
+        $options = array('-1' => get_string("auth_emailadminnotif_strategy_first", "auth_emailadmin"),
+                '-2' => get_string("auth_emailadminnotif_strategy_all", "auth_emailadmin"),
+                '-3' => get_string("auth_emailadminnotif_strategy_company", "auth_emailadmin"));
         $admins = get_admins();
         foreach ($admins as $admin) {
             $options[$admin->id] = $admin->username;

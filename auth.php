@@ -37,6 +37,8 @@ require_once('classes/message.class.php');
  */
 class auth_plugin_emailadmin extends auth_plugin_base {
 
+    const IOMAD_COMPANY_ADMIN_NOTIF = -3;
+
     /**
      * Constructor.
      */
@@ -241,7 +243,7 @@ class auth_plugin_emailadmin extends auth_plugin_base {
          *  -2: All admin users
          * >=0: Specific user id
          */
-        if (!isset($config->notif_strategy) || !is_numeric($config->notif_strategy) || $config->notif_strategy < -2) {
+        if (!isset($config->notif_strategy) || !is_numeric($config->notif_strategy) || $config->notif_strategy < -3) {
             $config->notif_strategy = -1; // Default: first admin user found.
         }
 
@@ -270,7 +272,7 @@ class auth_plugin_emailadmin extends auth_plugin_base {
      * @return bool Returns true if mail was sent OK to *any* admin and false if otherwise.
      */
     public function send_confirmation_email_support($user) {
-        global $CFG;
+        global $CFG, $DB;
         $config = get_config('auth/emailadmin');
 
         $site = get_site();
@@ -303,7 +305,6 @@ class auth_plugin_emailadmin extends auth_plugin_base {
         $user->mailformat = 1;  // Always send HTML version as well.
 
         // Directly email rather than using the messaging system to ensure its not routed to a popup or jabber.
-        $admins = get_admins();
         $return = false;
         $admin_found = false;
 
@@ -314,15 +315,44 @@ class auth_plugin_emailadmin extends auth_plugin_base {
 
         $config->notif_strategy = intval($config->notif_strategy);
         $send_list = array();
-        foreach ($admins as $admin) {
-            error_log(print_r( $config->notif_strategy . ":" . $admin->id, true ));
-            if ($config->notif_strategy < 0 || $config->notif_strategy == $admin->id) {
-                $admin_found = true;
+
+        if ($config->notif_strategy == self::IOMAD_COMPANY_ADMIN_NOTIF)  {
+            list($dump, $emaildomain) = explode('@', $user->email);
+            if ($domaininfo = $DB->get_record_sql("SELECT * FROM {company_domains} WHERE " . $DB->sql_compare_text('domain') . " = '" . $DB->sql_compare_text($emaildomain)."'")) {
+                // Get company.
+                $company = new company($domaininfo->companyid);
+            } else if (!empty($CFG->local_iomad_signup_company)) {
+                // Do we have a company to assign?
+                // Get company.
+                $company = new company($CFG->local_iomad_signup_company);
             }
-            if ($admin_found) {
-                $send_list[] = $admin;
-                if ($config->notif_strategy == -1 || $config->notif_strategy >= 0 ) {
-                    break;
+
+            if (!empty($company)) {
+                $managerids = $company->get_company_managers();
+                if ($managerids) {
+                    list($select, $params) = $DB->get_in_or_equal(array_keys($managerids));
+                    $where = 'id ' . $select;
+                    $managerusers = $DB->get_records_select('user', $where, $params);
+                }
+                if ($managerusers) {
+                    $admin_found = true;
+                    foreach ($managerusers as $manager) {
+                        $send_list[] = $manager;
+                    }
+                }
+            }
+        } else {
+            $admins = get_admins();
+            foreach ($admins as $admin) {
+                error_log(print_r($config->notif_strategy . ":" . $admin->id, true));
+                if ($config->notif_strategy < 0 || $config->notif_strategy == $admin->id) {
+                    $admin_found = true;
+                }
+                if ($admin_found) {
+                    $send_list[] = $admin;
+                    if ($config->notif_strategy == -1 || $config->notif_strategy >= 0) {
+                        break;
+                    }
                 }
             }
         }

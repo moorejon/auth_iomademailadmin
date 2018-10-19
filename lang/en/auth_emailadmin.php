@@ -31,28 +31,28 @@ $string['auth_emailadminsettings'] = 'Settings';
 $string['auth_emailadminuserconfirmation'] = '
 Hello {$a->firstname},
 
-Welcome to (My Organization)! Your account has been approved. If you have not already done so, please tell us how you discovered (My Organization).
+Welcome to {$a->company}! Your account has been approved. If you have not already done so, please tell us how you discovered {$a->company}.
 
 For student accounts, please let us know the project you would like to participate in and we will create your teacher account. The information for creating student accounts is  at http://www.my.org/student-accounts <a href=http://www.my.org/student-accounts>here</a>.
 
 The first name needs to be the students "first name" and "first initial of the last name." The students last name will be the school name. Passwords need to be at least 8 characters long.
 
-We\'re delighted you have joined us and hope to see you and your students participating in some of our projects. You are now a member of a rapidly growing community of educators and students using (My Organization) to share  projects, work and knowledge. If you ever need help don\'t hesitate to write to us at myorg@gmail.com <a href=mailto:myorg@gmail.com>here</a>. We\'ll try to address any questions, comments or concerns you may have regarding the (My Organization) with Google  Resources, Services and Tools. Check out our web pages at  http://www.my.org <a href=http://www.my.org/>here</a>
+We\'re delighted you have joined us and hope to see you and your students participating in some of our projects. You are now a member of a rapidly growing community of educators and students using {$a->company} to share  projects, work and knowledge. If you ever need help don\'t hesitate to write to us at myorg@gmail.com <a href=mailto:myorg@gmail.com>here</a>. We\'ll try to address any questions, comments or concerns you may have regarding {$a->company} with Google  Resources, Services and Tools. Check out our web pages at  http://www.my.org <a href=http://www.my.org/>here</a>
 
 * * *
 
-What is (My Organization)?
+What is {$a->company}?
 
-(My Organization) is an easy-to-use, Internet-based collaborative environment that enables educators to develop and manage Web-based curricular projects, share information, and work together on an international level. (My Organization) provides a variety of  Google tools and gadgets including integrated messaging, conferencing, and calendars, to support collaboration among teachers and students within (My Organization).
+{$a->company} is an easy-to-use, Internet-based collaborative environment that enables educators to develop and manage Web-based curricular projects, share information, and work together on an international level. {$a->company} provides a variety of  Google tools and gadgets including integrated messaging, conferencing, and calendars, to support collaboration among teachers and students within {$a->company}.
 
-(My Organization) welcomes your projects and is looking forward to sharing a rich variety of projects and activities with your  participating students. When you login, list of popular categories appears. Click on one of the categories to browse the projects specified by it.  As you browse through these projects (click on the titles), they may help you generate an idea or two for you to use in developing a project of your own in (My Organization) or they may help you to identify projects in which
+{$a->company} welcomes your projects and is looking forward to sharing a rich variety of projects and activities with your  participating students. When you login, list of popular categories appears. Click on one of the categories to browse the projects specified by it.  As you browse through these projects (click on the titles), they may help you generate an idea or two for you to use in developing a project of your own in {$a->company} or they may help you to identify projects in which
 you may like to collaborate with other teachers and their students.
 
 * * *
 
-Because (My Organization) is project driven and run by volunteers, we would like you to consider creating a project in (My Organization) or volunteering to help with one. If you decide you would like to create a project or volunteer to help or support other projects,  please email us at myorg@gmail.com <a href=mailto:myorg@gmail.com>here</a>. (My Organization) leaders and volunteers are here to support your needs.
+Because {$a->company} is project driven and run by volunteers, we would like you to consider creating a project in {$a->company} or volunteering to help with one. If you decide you would like to create a project or volunteer to help or support other projects,  please email us at myorg@gmail.com <a href=mailto:myorg@gmail.com>here</a>. {$a->company} leaders and volunteers are here to support your needs.
 
-Remember,  online support for all (My Organization) participants is provided by (My Organization) volunteers. Please take what you learn from us and help other teachers learn too! We look forward to working with you and seeing your new projects!
+Remember,  online support for all {$a->company} participants is provided by {$a->company} volunteers. Please take what you learn from us and help other teachers learn too! We look forward to working with you and seeing your new projects!
 
 
 Thank you,
@@ -61,10 +61,7 @@ My Name, Director
 
 
 --
-(My Organization) Team
-<a href=http://www.my.org/>http://www.my.org</a>
-<a href=mailto:myorg@gmail.com>myorg@gmail.com</a>
-<a href=tel:123%20555%205555>123 555 5555</a>
+{$a->company} Team
 
 ';
 $string['auth_emailadminconfirmation'] = '
@@ -101,5 +98,7 @@ $string['auth_emailadminnotif_strategy_key'] = 'Notification strategy:';
 $string['auth_emailadminnotif_strategy'] = 'Defines the strategy to send the registration notifications. Available options are "first" admin user, "all" admin users or one specific admin user.';
 $string['auth_emailadminnotif_strategy_first'] = 'First admin user';
 $string['auth_emailadminnotif_strategy_all'] = 'All admin users';
+$string['auth_emailadminnotif_strategy_company'] = 'Company admin users';
+$string['myorganization'] = '(My Organization)';
 
 $string['pluginname'] = 'Email-based self-registration with admin confirmation';
