@@ -110,7 +110,7 @@ class auth_plugin_emailadmin extends auth_plugin_base {
         $usercontext = context_user::instance($user->id);
         $event = \core\event\user_created::create(
             array(
-                'objectid' => $user->id,
+                'objectid' => (int)$user->id,
                 'relateduserid' => $user->id,
                 'context' => $usercontext
                 )
@@ -317,15 +317,8 @@ class auth_plugin_emailadmin extends auth_plugin_base {
         $send_list = array();
 
         if ($config->notif_strategy == self::IOMAD_COMPANY_ADMIN_NOTIF)  {
-            list($dump, $emaildomain) = explode('@', $user->email);
-            if ($domaininfo = $DB->get_record_sql("SELECT * FROM {company_domains} WHERE " . $DB->sql_compare_text('domain') . " = '" . $DB->sql_compare_text($emaildomain)."'")) {
-                // Get company.
-                $company = new company($domaininfo->companyid);
-            } else if (!empty($CFG->local_iomad_signup_company)) {
-                // Do we have a company to assign?
-                // Get company.
-                $company = new company($CFG->local_iomad_signup_company);
-            }
+            $companyrecord = company::get_company_byuserid($user->id);
+            $company = new company($companyrecord->id);
 
             if (!empty($company)) {
                 $managerids = $company->get_company_managers();
