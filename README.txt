@@ -1,4 +1,4 @@
-moodle-auth_emailadmin
+moodle-auth_iomademailadmin
 ======================
 
 Moodle plugin to provide email self-registration with admin confirmation.
