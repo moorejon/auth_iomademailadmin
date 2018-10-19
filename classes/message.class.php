@@ -64,10 +64,11 @@ class message {
 
         include_once($CFG->dirroot.'/local/iomad/lib/company.php');
         if (class_exists('company')) {
-            $company = \company::get_company_byuserid($user->id);
+            $companyid = \company::get_company_byuserid($user->id);
+            $company = new \company($companyid);
         }
         if (!empty($company)) {
-            $data->company = $company->name;
+            $data->company = $company->get_name();
         } else {
             $data->company = get_string('myorganization', 'auth_iomademailadmin');
         }
