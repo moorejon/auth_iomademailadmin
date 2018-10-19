@@ -61,6 +61,16 @@ class message {
         $data->firstname = fullname($user);
         $data->sitename  = format_string($site->fullname);
         $data->admin     = generate_email_signoff();
+
+        include_once($CFG->dirroot.'/local/iomad/lib/company.php');
+        if (class_exists('company')) {
+            $company = \company::get_company_byuserid($user->id);
+        }
+        if (!empty($company)) {
+            $data->company = $company->name;
+        } else {
+            $data->company = get_string('myorganization', 'auth_emailadmin');
+        }
     
         $use_lang = message::get_user_language($user);
         $subject = get_string_manager()->get_string('auth_emailadminconfirmationsubject', 'auth_emailadmin', format_string($site->fullname), $use_lang);
