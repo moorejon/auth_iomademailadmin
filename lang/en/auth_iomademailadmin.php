@@ -101,4 +101,4 @@ $string['auth_iomademailadminnotif_strategy_all'] = 'All admin users';
 $string['auth_iomademailadminnotif_strategy_company'] = 'Company admin users';
 $string['myorganization'] = '(My Organization)';
 
-$string['pluginname'] = 'Email-based self-registration with admin confirmation';
+$string['pluginname'] = 'IOMAD Email-based self-registration with admin confirmation';
