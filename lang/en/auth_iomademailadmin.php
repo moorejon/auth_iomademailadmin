@@ -33,11 +33,9 @@ Hello {$a->firstname},
 
 Welcome to {$a->company}! Your account has been approved. If you have not already done so, please tell us how you discovered {$a->company}.
 
-For student accounts, please let us know the project you would like to participate in and we will create your teacher account. The information for creating student accounts is  at http://www.my.org/student-accounts <a href=http://www.my.org/student-accounts>here</a>.
-
 The first name needs to be the students "first name" and "first initial of the last name." The students last name will be the school name. Passwords need to be at least 8 characters long.
 
-We\'re delighted you have joined us and hope to see you and your students participating in some of our projects. You are now a member of a rapidly growing community of educators and students using {$a->company} to share  projects, work and knowledge. If you ever need help don\'t hesitate to write to us at myorg@gmail.com <a href=mailto:myorg@gmail.com>here</a>. We\'ll try to address any questions, comments or concerns you may have regarding {$a->company} with Google  Resources, Services and Tools. Check out our web pages at  http://www.my.org <a href=http://www.my.org/>here</a>
+We\'re delighted you have joined us and hope to see you and your students participating in some of our projects. You are now a member of a rapidly growing community of educators and students using {$a->company} to share  projects, work and knowledge.
 
 * * *
 
@@ -50,17 +48,13 @@ you may like to collaborate with other teachers and their students.
 
 * * *
 
-Because {$a->company} is project driven and run by volunteers, we would like you to consider creating a project in {$a->company} or volunteering to help with one. If you decide you would like to create a project or volunteer to help or support other projects,  please email us at myorg@gmail.com <a href=mailto:myorg@gmail.com>here</a>. {$a->company} leaders and volunteers are here to support your needs.
+Because {$a->company} is project driven and run by volunteers, we would like you to consider creating a project in {$a->company} or volunteering to help with one.
 
 Remember,  online support for all {$a->company} participants is provided by {$a->company} volunteers. Please take what you learn from us and help other teachers learn too! We look forward to working with you and seeing your new projects!
 
 
 Thank you,
 
-My Name, Director
-
-
---
 {$a->company} Team
 
 ';
