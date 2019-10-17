@@ -64,8 +64,8 @@ class message {
 
         include_once($CFG->dirroot.'/local/iomad/lib/company.php');
         if (class_exists('company')) {
-            if ($companyid = \company::get_company_byuserid($user->id)) {
-                $company = new \company($companyid);
+            if ($companyrecord = \company::get_company_byuserid($user->id)) {
+                $company = new \company($companyrecord->id);
             }
         }
         if (!empty($company)) {
@@ -77,7 +77,7 @@ class message {
         $use_lang = message::get_user_language($user);
         $subject = get_string_manager()->get_string('auth_iomademailadminconfirmationsubject', 'auth_iomademailadmin', format_string($site->fullname), $use_lang);
     
-        $username = urlencode($user->username);
+        $username = $user->username;
         $username = str_replace('.', '%2E', $username); // Prevent problems with trailing dots.
         $data->link  = $CFG->wwwroot;
         $data->username = $username;

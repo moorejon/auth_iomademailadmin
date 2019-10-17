@@ -300,7 +300,7 @@ class auth_plugin_iomademailadmin extends auth_plugin_base {
         if ($config->notif_strategy == self::IOMAD_COMPANY_ADMIN_NOTIF)  {
             $companyrecord = company::get_company_byuserid($user->id);
             if ($companyrecord) {
-                $company = new company($companyrecord);
+                $company = new company($companyrecord->id);
             }
 
             if (!empty($company)) {
