@@ -19,7 +19,7 @@
  * NOTE: Based on "email" by Martin Dougiamas (http://dougiamas.com)
  *
  * @package    auth
- * @subpackage emailadmin
+ * @subpackage iomademailadmin
  * @copyright  2012 onwards Felipe Carasso (http://carassonet.org)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,6 +28,6 @@ defined('MOODLE_INTERNAL') || die;
 
 $plugin->version   = 2019072300;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2015051101;        // Requires this Moodle version.
-$plugin->component = 'auth_emailadmin';      // Full name of the plugin (used for diagnostics).
+$plugin->component = 'auth_iomademailadmin';      // Full name of the plugin (used for diagnostics).
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = '1.4.4';

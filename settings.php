@@ -17,7 +17,7 @@
 /**
  * Admin settings and defaults. Heavily based on auth/email/settings.php.
  *
- * @package auth_emailadmin
+ * @package    auth_iomademailadmin
  * @copyright  2019 Felipe Carasso
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,32 +27,33 @@ defined('MOODLE_INTERNAL') || die;
 if ($ADMIN->fulltree) {
 
     // Introductory explanation.
-    $settings->add(new admin_setting_heading('auth_emailadmin/pluginname', '',
-        new lang_string('auth_emailadmindescription', 'auth_emailadmin')));
+    $settings->add(new admin_setting_heading('auth_iomademailadmin/pluginname', '',
+        new lang_string('auth_iomademailadmindescription', 'auth_iomademailadmin')));
 
     $options = array(
         new lang_string('no'),
         new lang_string('yes'),
     );
 
-    $settings->add(new admin_setting_configselect('auth_emailadmin/recaptcha',
-        new lang_string('auth_emailadminrecaptcha_key', 'auth_emailadmin'),
-        new lang_string('auth_emailadminrecaptcha', 'auth_emailadmin'), 0, $options));
-    $options = array('-1' => get_string("auth_emailadminnotif_strategy_first", "auth_emailadmin"), 
-        '-2' => get_string("auth_emailadminnotif_strategy_all", "auth_emailadmin"),
-        '-3' => get_string("auth_emailadminnotif_strategy_allupdate", "auth_emailadmin")
+    $settings->add(new admin_setting_configselect('auth_iomademailadmin/recaptcha',
+        new lang_string('auth_iomademailadminrecaptcha_key', 'auth_iomademailadmin'),
+        new lang_string('auth_iomademailadminrecaptcha', 'auth_iomademailadmin'), 0, $options));
+    $options = array('-1' => get_string("auth_iomademailadminnotif_strategy_first", "auth_iomademailadmin"),
+        '-2' => get_string("auth_iomademailadminnotif_strategy_all", "auth_iomademailadmin"),
+        '-3' => get_string("auth_iomademailadminnotif_strategy_allupdate", "auth_iomademailadmin"),
+        '-4' => get_string("auth_iomademailadminnotif_strategy_company", "auth_iomademailadmin")
         );
     $admins = array_merge(get_admins(), get_users_by_capability(context_system::instance(), 'moodle/user:update'));
     foreach ($admins as $admin) {
         $options[$admin->id] = $admin->username;
     }
 
-    $settings->add(new admin_setting_configselect('auth_emailadmin/notif_strategy',
-        new lang_string('auth_emailadminnotif_strategy_key', 'auth_emailadmin'),
-        new lang_string('auth_emailadminnotif_strategy', 'auth_emailadmin'), -1, $options));
+    $settings->add(new admin_setting_configselect('auth_iomademailadmin/notif_strategy',
+        new lang_string('auth_iomademailadminnotif_strategy_key', 'auth_iomademailadmin'),
+        new lang_string('auth_iomademailadminnotif_strategy', 'auth_iomademailadmin'), -1, $options));
 
     // Display locking / mapping of profile fields.
-    $authplugin = get_auth_plugin('emailadmin');
+    $authplugin = get_auth_plugin('iomademailadmin');
     display_auth_lock_options($settings, $authplugin->authtype, $authplugin->userfields,
             get_string('auth_fieldlocks_help', 'auth'), false, false);
 }
