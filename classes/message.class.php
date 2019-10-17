@@ -78,7 +78,6 @@ class message {
         $subject = get_string_manager()->get_string('auth_iomademailadminconfirmationsubject', 'auth_iomademailadmin', format_string($site->fullname), $use_lang);
     
         $username = $user->username;
-        $username = str_replace('.', '%2E', $username); // Prevent problems with trailing dots.
         $data->link  = $CFG->wwwroot;
         $data->username = $username;
         $message     = get_string_manager()->get_string('auth_iomademailadminuserconfirmation', 'auth_iomademailadmin', $data, $use_lang);
