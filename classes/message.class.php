@@ -64,8 +64,9 @@ class message {
 
         include_once($CFG->dirroot.'/local/iomad/lib/company.php');
         if (class_exists('company')) {
-            $companyid = \company::get_company_byuserid($user->id);
-            $company = new \company($companyid);
+            if ($companyid = \company::get_company_byuserid($user->id)) {
+                $company = new \company($companyid);
+            }
         }
         if (!empty($company)) {
             $data->company = $company->get_name();
